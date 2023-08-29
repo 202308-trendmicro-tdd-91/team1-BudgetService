@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +13,9 @@ public class BudgetService {
         budgetRepo = new BudgetRepo();
     }
 
-    private static long getOverlappingDays(LocalDate start, LocalDate end, YearMonth startYearMonth, YearMonth endYearMonth, Budget budget) {
+    private static long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
+        YearMonth endYearMonth = YearMonth.from(end);
+        YearMonth startYearMonth = YearMonth.from(start);
         long daysBetween;
         if (startYearMonth.equals(endYearMonth)) {
             daysBetween = DAYS.between(start, end);
@@ -52,7 +53,7 @@ public class BudgetService {
                 continue;
             }
             Budget budget = findBudget.get();
-            long overlappingDays = getOverlappingDays(start, end, startYearMonth, endYearMonth, budget);
+            long overlappingDays = getOverlappingDays(start, end, budget);
             rtBudget += budget.dailyAmount() * overlappingDays;
         }
 
