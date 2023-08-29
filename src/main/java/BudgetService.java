@@ -1,7 +1,5 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -19,22 +17,9 @@ public class BudgetService {
         return yearMonth.equals(dateYearMonth);
     }
 
-    public static YearMonth toYearMonth(String yearMonthString) {
+    private static YearMonth toYearMonth(String yearMonthString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
         return YearMonth.parse(yearMonthString, formatter);
-    }
-
-    public static List<YearMonth> getYearMonthsBetween(LocalDate startDate, LocalDate endDate) {
-        List<YearMonth> yearMonths = new ArrayList<>();
-        YearMonth start = YearMonth.from(startDate);
-        YearMonth end = YearMonth.from(endDate);
-
-        while (!start.isAfter(end)) {
-            yearMonths.add(start);
-            start = start.plusMonths(1);
-        }
-
-        return yearMonths;
     }
 
     public double query(LocalDate start, LocalDate end) {
@@ -42,7 +27,16 @@ public class BudgetService {
             return 0;
         }
         List<Budget> listBudgets = budgetRepo.getAll();
-        List<YearMonth> yearMonthsBetween = getYearMonthsBetween(start, end);
+        List<YearMonth> yearMonths = new ArrayList<>();
+        YearMonth start1 = YearMonth.from(start);
+        YearMonth end1 = YearMonth.from(end);
+
+        while (!start1.isAfter(end1)) {
+            yearMonths.add(start1);
+            start1 = start1.plusMonths(1);
+        }
+
+        List<YearMonth> yearMonthsBetween = yearMonths;
 
         long daysBetween;
         double rtBudget = 0;
