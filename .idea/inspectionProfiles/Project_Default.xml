@@ -1,0 +1,18 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <replaceConfiguration name="merge if" text="if ($b1$) {&#10;    return $s$&#10;}&#10;if ($b2$) {&#10;    return $s$&#10;}&#10;" recursive="false" caseInsensitive="false" type="Kotlin" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="if ($b1$ || $b2$) {&#10;    return $s$&#10;}&#10;">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="b1" within="" contains="" />
+        <constraint name="b2" within="" contains="" />
+        <constraint name="s" within="" contains="" />
+      </replaceConfiguration>
+      <replaceConfiguration name="unwrap useless if" text="if ($b$) {&#10;    return $statement$&#10;}&#10;return $statement$" recursive="false" caseInsensitive="false" type="Kotlin" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="false" replacement="return $statement$">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="b" within="" contains="" />
+        <constraint name="statement" within="" contains="" />
+      </replaceConfiguration>
+    </inspection_tool>
+  </profile>
+</component>
