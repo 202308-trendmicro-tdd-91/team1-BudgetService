@@ -14,27 +14,22 @@ public class BudgetService {
     }
 
     private static long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
-        long daysBetween;
         LocalDate overlappingStart;
         LocalDate overlappingEnd;
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
             overlappingStart = start;
             overlappingEnd = end;
-//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else if (budget.getYearMonthInstance().equals(YearMonth.from(start))) {
             overlappingStart = start;
             overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
-//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else if (budget.getYearMonthInstance().equals(YearMonth.from(end))) {
             overlappingStart = budget.getYearMonthInstance().atDay(1);
             overlappingEnd = end;
-//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else {
             overlappingStart = budget.getYearMonthInstance().atDay(1);
             overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
-//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         }
-        daysBetween = DAYS.between(overlappingStart, overlappingEnd);
+        long daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         return daysBetween + 1;
     }
 
