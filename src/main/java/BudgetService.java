@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +9,6 @@ public class BudgetService {
 
     BudgetService() {
         budgetRepo = new BudgetRepo();
-    }
-
-    private static boolean isDateInYearMonth(LocalDate date, YearMonth yearMonth) {
-        YearMonth dateYearMonth = YearMonth.from(date);
-        return yearMonth.equals(dateYearMonth);
     }
 
     public double query(LocalDate start, LocalDate end) {
@@ -37,7 +31,8 @@ public class BudgetService {
             if (i == 0) {
                 for (Budget budget : listBudgets) {
                     YearMonth budgetYearMonth = budget.getYearMonthInstance();
-                    if (isDateInYearMonth(start, budgetYearMonth)) {
+                    YearMonth dateYearMonth = YearMonth.from(start);
+                    if (budgetYearMonth.equals(dateYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
                             daysBetween = ChronoUnit.DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
@@ -50,7 +45,8 @@ public class BudgetService {
                 }
             } else if (i == yearMonthsBetween.size() - 1) {
                 for (Budget budget : listBudgets) {
-                    if (isDateInYearMonth(end, budget.getYearMonthInstance())) {
+                    YearMonth dateYearMonth = YearMonth.from(end);
+                    if (budget.getYearMonthInstance().equals(dateYearMonth)) {
                         daysBetween = ChronoUnit.DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
                         rtBudget += budget.amount / budget.getYearMonthInstance().lengthOfMonth() * (daysBetween + 1);
                     }
