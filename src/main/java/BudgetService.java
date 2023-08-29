@@ -15,23 +15,26 @@ public class BudgetService {
 
     private static long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
         long daysBetween;
+        LocalDate overlappingStart;
+        LocalDate overlappingEnd;
         if (YearMonth.from(start).equals(YearMonth.from(end))) {
-            LocalDate overlappingStart = start;
-            LocalDate overlappingEnd = end;
-            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
+            overlappingStart = start;
+            overlappingEnd = end;
+//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else if (budget.getYearMonthInstance().equals(YearMonth.from(start))) {
-            LocalDate overlappingStart = start;
-            LocalDate overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
-            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
+            overlappingStart = start;
+            overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
+//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else if (budget.getYearMonthInstance().equals(YearMonth.from(end))) {
-            LocalDate overlappingStart = budget.getYearMonthInstance().atDay(1);
-            LocalDate overlappingEnd = end;
-            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
+            overlappingStart = budget.getYearMonthInstance().atDay(1);
+            overlappingEnd = end;
+//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         } else {
-            LocalDate overlappingStart = budget.getYearMonthInstance().atDay(1);
-            LocalDate overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
-            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
+            overlappingStart = budget.getYearMonthInstance().atDay(1);
+            overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
+//            daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         }
+        daysBetween = DAYS.between(overlappingStart, overlappingEnd);
         return daysBetween + 1;
     }
 
