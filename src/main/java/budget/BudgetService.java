@@ -37,8 +37,7 @@ public class BudgetService {
             }
             Budget budget = findBudget.get();
             Period period = new Period(start, end);
-            long overlappingDays = period.getOverlappingDays(budget.createPeriod());
-            rtBudget += budget.dailyAmount() * overlappingDays;
+            rtBudget += budget.dailyAmount() * period.getOverlappingDays(budget.createPeriod());
         }
 
         return rtBudget; // this seems to be a placeholder, you may want to change it to return rtBudget.
