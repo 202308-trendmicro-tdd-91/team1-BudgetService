@@ -10,6 +10,10 @@ public class Budget {
         this.amount = amount;
     }
 
+    LocalDate firstDay() {
+        return getYearMonthInstance().atDay(1);
+    }
+
     LocalDate lastDay() {
         return getYearMonthInstance().atEndOfMonth();
     }
