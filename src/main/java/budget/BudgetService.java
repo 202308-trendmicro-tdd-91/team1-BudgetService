@@ -13,6 +13,10 @@ public class BudgetService {
         budgetRepo = new BudgetRepo();
     }
 
+    private static Period createPeriod(Budget budget) {
+        return new Period(budget.firstDay(), budget.lastDay());
+    }
+
     public double query(LocalDate start, LocalDate end) {
         if (end.isBefore(start)) {
             return 0;
@@ -36,7 +40,7 @@ public class BudgetService {
                 continue;
             }
             Budget budget = findBudget.get();
-            long overlappingDays = new Period(start, end).getOverlappingDays(new Period(budget.firstDay(), budget.lastDay()));
+            long overlappingDays = new Period(start, end).getOverlappingDays(createPeriod(budget));
             rtBudget += budget.dailyAmount() * overlappingDays;
         }
 
