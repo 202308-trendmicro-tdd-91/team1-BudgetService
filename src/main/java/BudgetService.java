@@ -46,7 +46,8 @@ public class BudgetService {
             } else {
                 daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth());
             }
-            rtBudget += budget.dailyAmount() * (daysBetween + 1);
+            long overlappingDays = daysBetween + 1;
+            rtBudget += budget.dailyAmount() * overlappingDays;
         }
 
         return rtBudget; // this seems to be a placeholder, you may want to change it to return rtBudget.
