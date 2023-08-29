@@ -24,8 +24,7 @@ public class BudgetService {
         } else {
             daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth());
         }
-        long overlappingDays = daysBetween + 1;
-        return overlappingDays;
+        return daysBetween + 1;
     }
 
     public double query(LocalDate start, LocalDate end) {
