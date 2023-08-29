@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +8,10 @@ public class Budget {
     public Budget (String yearMonth, int amount){
         this.yearMonth = yearMonth;
         this.amount = amount;
+    }
+
+    LocalDate lastDay() {
+        return getYearMonthInstance().atEndOfMonth();
     }
 
     int dailyAmount() {
