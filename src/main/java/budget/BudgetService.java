@@ -28,19 +28,21 @@ public class BudgetService {
             currentYearMonth = currentYearMonth.plusMonths(1);
         }
 
-        long daysBetween;
         double rtBudget = 0;
-        for (YearMonth yearMonth : yearMonthsBetween) {
-            Optional<Budget> findBudget = listBudgets.stream().filter(b -> b.getYearMonthInstance().equals(yearMonth)).findFirst();
-            if (findBudget.isEmpty()) {
-                continue;
-            }
-            Budget budget = findBudget.get();
+        for (Budget budget : listBudgets) {
+
+//        }
+//        for (YearMonth yearMonth : yearMonthsBetween) {
+//            Optional<Budget> findBudget = listBudgets.stream().filter(b -> b.getYearMonthInstance().equals(yearMonth)).findFirst();
+//            if (findBudget.isEmpty()) {
+//                continue;
+//            }
+//            Budget budget = findBudget.get();
             Period period = new Period(start, end);
             rtBudget += budget.overlappingAmount(period);
         }
 
-        return rtBudget; // this seems to be a placeholder, you may want to change it to return rtBudget.
+        return rtBudget;
     }
 
     public BudgetRepo getBudgetRepo() {
