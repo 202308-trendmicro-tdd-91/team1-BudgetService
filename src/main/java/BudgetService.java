@@ -11,6 +11,10 @@ public class BudgetService {
         budgetRepo = new BudgetRepo();
     }
 
+    private static int dailyAmount(Budget budget) {
+        return budget.amount / budget.getYearMonthInstance().lengthOfMonth();
+    }
+
     public double query(LocalDate start, LocalDate end) {
         if (end.isBefore(start)) {
             return 0;
@@ -39,7 +43,7 @@ public class BudgetService {
                             daysBetween = ChronoUnit.DAYS.between(start, end);
                         }
 
-                        rtBudget += budget.amount / budget.getYearMonthInstance().lengthOfMonth() * (daysBetween + 1);
+                        rtBudget += dailyAmount(budget) * (daysBetween + 1);
                     }
                 }
             } else if (i == yearMonthsBetween.size() - 1) {
