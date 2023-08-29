@@ -17,11 +17,6 @@ public class BudgetService {
         return yearMonth.equals(dateYearMonth);
     }
 
-    private static YearMonth toYearMonth(String yearMonthString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
-        return YearMonth.parse(yearMonthString, formatter);
-    }
-
     public double query(LocalDate start, LocalDate end) {
         if (end.isBefore(start)) {
             return 0;
