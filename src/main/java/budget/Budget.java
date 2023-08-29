@@ -12,6 +12,10 @@ public class Budget {
         this.amount = amount;
     }
 
+    Period createPeriod() {
+        return new Period(firstDay(), lastDay());
+    }
+
     LocalDate firstDay() {
         return getYearMonthInstance().atDay(1);
     }
