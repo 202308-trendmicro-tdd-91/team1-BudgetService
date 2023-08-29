@@ -36,14 +36,13 @@ public class BudgetService {
             startYearMonth = startYearMonth.plusMonths(1);
         }
 
-//        List<YearMonth> yearMonthsBetween = yearMonthsBetween;
-
         long daysBetween;
         double rtBudget = 0;
         for (int i = 0; i < yearMonthsBetween.size(); i++) {
             if (i == 0) {
                 for (Budget budget : listBudgets) {
-                    if (isDateInYearMonth(start, toYearMonth(budget.yearMonth))) {
+                    YearMonth budgetYearMonth = toYearMonth(budget.yearMonth);
+                    if (isDateInYearMonth(start, budgetYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
                             daysBetween = ChronoUnit.DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
@@ -51,7 +50,7 @@ public class BudgetService {
                             daysBetween = ChronoUnit.DAYS.between(start, end);
                         }
 
-                        rtBudget += budget.amount / toYearMonth(budget.yearMonth).lengthOfMonth() * (daysBetween + 1);
+                        rtBudget += budget.amount / budgetYearMonth.lengthOfMonth() * (daysBetween + 1);
                     }
                 }
             } else if (i == yearMonthsBetween.size() - 1) {
