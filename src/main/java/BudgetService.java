@@ -4,6 +4,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class BudgetService {
     private final BudgetRepo budgetRepo;
 
@@ -34,9 +36,9 @@ public class BudgetService {
                     if (budget.getYearMonthInstance().equals(startYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
-                            daysBetween = ChronoUnit.DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
+                            daysBetween = DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
                         } else {
-                            daysBetween = ChronoUnit.DAYS.between(start, end);
+                            daysBetween = DAYS.between(start, end);
                         }
 
                         rtBudget += budget.dailyAmount() * (daysBetween + 1);
@@ -45,14 +47,15 @@ public class BudgetService {
             } else if (i == yearMonthsBetween.size() - 1) {
                 for (Budget budget : listBudgets) {
                     if (budget.getYearMonthInstance().equals(endYearMonth)) {
-                        daysBetween = ChronoUnit.DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
+                        daysBetween = DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
                         rtBudget += budget.dailyAmount() * (daysBetween + 1);
                     }
                 }
             } else {
                 for (Budget budget : listBudgets) {
                     if (yearMonthsBetween.get(i).equals(budget.getYearMonthInstance())) {
-                        rtBudget += budget.amount;
+                        rtBudget += budget.dailyAmount() * (DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth()) + 1);
+//                        rtBudget += budget.amount;
                     }
                 }
             }
