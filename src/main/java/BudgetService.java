@@ -54,8 +54,8 @@ public class BudgetService {
             } else {
                 for (Budget budget : listBudgets) {
                     if (yearMonthsBetween.get(i).equals(budget.getYearMonthInstance())) {
-                        rtBudget += budget.dailyAmount() * (DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth()) + 1);
-//                        rtBudget += budget.amount;
+                        daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth());
+                        rtBudget += budget.dailyAmount() * (daysBetween + 1);
                     }
                 }
             }
