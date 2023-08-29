@@ -26,8 +26,8 @@ public class BudgetService {
             overlappingStart = budget.firstDay();
             overlappingEnd = end;
         } else {
-            overlappingStart = budget.getYearMonthInstance().atDay(1);
-            overlappingEnd = budget.getYearMonthInstance().atEndOfMonth();
+            overlappingStart = budget.firstDay();
+            overlappingEnd = budget.lastDay();
         }
         return DAYS.between(overlappingStart, overlappingEnd) + 1;
     }
