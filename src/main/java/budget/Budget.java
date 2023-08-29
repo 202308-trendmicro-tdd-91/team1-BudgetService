@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 public class Budget {
     String yearMonth;
     int amount;
-    public Budget (String yearMonth, int amount){
+
+    public Budget(String yearMonth, int amount) {
         this.yearMonth = yearMonth;
         this.amount = amount;
     }
@@ -16,24 +17,23 @@ public class Budget {
         return dailyAmount() * period.getOverlappingDays(createPeriod());
     }
 
-    Period createPeriod() {
+    private Period createPeriod() {
         return new Period(firstDay(), lastDay());
     }
 
-    LocalDate firstDay() {
+    private LocalDate firstDay() {
         return getYearMonthInstance().atDay(1);
     }
 
-    LocalDate lastDay() {
+    private LocalDate lastDay() {
         return getYearMonthInstance().atEndOfMonth();
     }
 
-    double dailyAmount() {
-        return (double)this.amount / getYearMonthInstance().lengthOfMonth();
+    private double dailyAmount() {
+        return (double) this.amount / getYearMonthInstance().lengthOfMonth();
     }
 
-    YearMonth getYearMonthInstance() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
-        return YearMonth.parse(this.yearMonth, formatter);
+    private YearMonth getYearMonthInstance() {
+        return YearMonth.parse(this.yearMonth, DateTimeFormatter.ofPattern("yyyyMM"));
     }
 }
