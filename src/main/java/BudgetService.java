@@ -20,9 +20,10 @@ public class BudgetService {
         YearMonth startYearMonth = YearMonth.from(start);
         YearMonth endYearMonth = YearMonth.from(end);
 
-        while (!startYearMonth.isAfter(endYearMonth)) {
-            yearMonthsBetween.add(startYearMonth);
-            startYearMonth = startYearMonth.plusMonths(1);
+        YearMonth currentYearMonth = startYearMonth;
+        while (!currentYearMonth.isAfter(endYearMonth)) {
+            yearMonthsBetween.add(currentYearMonth);
+            currentYearMonth = currentYearMonth.plusMonths(1);
         }
 
         long daysBetween;
