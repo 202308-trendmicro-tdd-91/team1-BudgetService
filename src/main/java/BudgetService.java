@@ -32,8 +32,8 @@ public class BudgetService {
             if (i == 0) {
                 for (Budget budget : listBudgets) {
                     YearMonth budgetYearMonth = budget.getYearMonthInstance();
-                    YearMonth dateYearMonth = YearMonth.from(start);
-                    if (budgetYearMonth.equals(dateYearMonth)) {
+//                    YearMonth dateYearMonth = YearMonth.from(start);
+                    if (budgetYearMonth.equals(startYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
                             daysBetween = ChronoUnit.DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
