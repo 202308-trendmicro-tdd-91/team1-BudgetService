@@ -38,7 +38,8 @@ public class BudgetService {
             }
             Budget budget = findBudget.get();
             if (budget.getYearMonthInstance().equals(startYearMonth)) {
-                if (!end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
+                if (startYearMonth.equals(endYearMonth)) {
+//                if (!end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
                     daysBetween = DAYS.between(start, end);
                 } else {
                     daysBetween = DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
