@@ -28,12 +28,12 @@ public class BudgetService {
         }
         List<Budget> listBudgets = budgetRepo.getAll();
         List<YearMonth> yearMonths = new ArrayList<>();
-        YearMonth start1 = YearMonth.from(start);
-        YearMonth end1 = YearMonth.from(end);
+        YearMonth startYearMonth = YearMonth.from(start);
+        YearMonth endYearMonth = YearMonth.from(end);
 
-        while (!start1.isAfter(end1)) {
-            yearMonths.add(start1);
-            start1 = start1.plusMonths(1);
+        while (!startYearMonth.isAfter(endYearMonth)) {
+            yearMonths.add(startYearMonth);
+            startYearMonth = startYearMonth.plusMonths(1);
         }
 
         List<YearMonth> yearMonthsBetween = yearMonths;
