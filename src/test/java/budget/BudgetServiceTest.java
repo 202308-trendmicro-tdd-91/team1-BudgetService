@@ -1,3 +1,7 @@
+package budget;
+
+import budget.BudgetRepo;
+import budget.BudgetService;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

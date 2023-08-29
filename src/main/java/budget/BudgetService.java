@@ -1,4 +1,4 @@
-import budget.Period;
+package budget;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
