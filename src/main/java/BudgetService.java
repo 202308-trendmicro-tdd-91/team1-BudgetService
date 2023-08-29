@@ -41,7 +41,8 @@ public class BudgetService {
         for (int i = 0; i < yearMonthsBetween.size(); i++) {
             if (i == 0) {
                 for (Budget budget : listBudgets) {
-                    YearMonth budgetYearMonth = toYearMonth(budget.yearMonth);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
+                    YearMonth budgetYearMonth = YearMonth.parse(budget.yearMonth, formatter);
                     if (isDateInYearMonth(start, budgetYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
