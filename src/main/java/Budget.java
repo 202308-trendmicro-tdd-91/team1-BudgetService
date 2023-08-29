@@ -9,6 +9,10 @@ public class Budget {
         this.amount = amount;
     }
 
+    int dailyAmount() {
+        return this.amount / getYearMonthInstance().lengthOfMonth();
+    }
+
     YearMonth getYearMonthInstance() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
         return YearMonth.parse(this.yearMonth, formatter);
