@@ -42,7 +42,7 @@ public class BudgetService {
             } else if (budget.getYearMonthInstance().equals(startYearMonth)) {
                 daysBetween = DAYS.between(start, budget.getYearMonthInstance().atEndOfMonth());
             } else if (budget.getYearMonthInstance().equals(endYearMonth)) {
-                daysBetween = DAYS.between(yearMonth.atDay(1), end);
+                daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), end);
             } else {
                 daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth());
             }
