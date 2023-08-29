@@ -44,10 +44,10 @@ public class BudgetService {
                 }
             } else if (i == yearMonthsBetween.size() - 1) {
                 for (Budget budget : listBudgets) {
-//                    YearMonth dateYearMonth = YearMonth.from(end);
                     if (budget.getYearMonthInstance().equals(endYearMonth)) {
                         daysBetween = ChronoUnit.DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
-                        rtBudget += budget.amount / budget.getYearMonthInstance().lengthOfMonth() * (daysBetween + 1);
+                        int dailyAmount = budget.dailyAmount();
+                        rtBudget += dailyAmount * (daysBetween + 1);
                     }
                 }
             } else {
