@@ -46,8 +46,7 @@ public class BudgetService {
                 for (Budget budget : listBudgets) {
                     if (budget.getYearMonthInstance().equals(endYearMonth)) {
                         daysBetween = ChronoUnit.DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
-                        int dailyAmount = budget.dailyAmount();
-                        rtBudget += dailyAmount * (daysBetween + 1);
+                        rtBudget += budget.dailyAmount() * (daysBetween + 1);
                     }
                 }
             } else {
