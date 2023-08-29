@@ -14,14 +14,12 @@ public class BudgetService {
     }
 
     private static long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
-        YearMonth endYearMonth = YearMonth.from(end);
-        YearMonth startYearMonth = YearMonth.from(start);
         long daysBetween;
-        if (startYearMonth.equals(endYearMonth)) {
+        if (YearMonth.from(start).equals(YearMonth.from(end))) {
             daysBetween = DAYS.between(start, end);
-        } else if (budget.getYearMonthInstance().equals(startYearMonth)) {
+        } else if (budget.getYearMonthInstance().equals(YearMonth.from(start))) {
             daysBetween = DAYS.between(start, budget.getYearMonthInstance().atEndOfMonth());
-        } else if (budget.getYearMonthInstance().equals(endYearMonth)) {
+        } else if (budget.getYearMonthInstance().equals(YearMonth.from(end))) {
             daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), end);
         } else {
             daysBetween = DAYS.between(budget.getYearMonthInstance().atDay(1), budget.getYearMonthInstance().atEndOfMonth());
