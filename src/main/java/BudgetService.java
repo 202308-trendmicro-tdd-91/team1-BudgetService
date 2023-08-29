@@ -1,3 +1,5 @@
+import budget.Period;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -13,18 +15,18 @@ public class BudgetService {
         budgetRepo = new BudgetRepo();
     }
 
-    private static long getOverlappingDays(LocalDate start, LocalDate end, Budget budget) {
+    private static long getOverlappingDays(Period period, Budget budget) {
         LocalDate overlappingStart;
         LocalDate overlappingEnd;
-        if (YearMonth.from(start).equals(YearMonth.from(end))) {
-            overlappingStart = start;
-            overlappingEnd = end;
-        } else if (budget.getYearMonthInstance().equals(YearMonth.from(start))) {
-            overlappingStart = start;
+        if (YearMonth.from(period.getStart()).equals(YearMonth.from(period.getEnd()))) {
+            overlappingStart = period.getStart();
+            overlappingEnd = period.getEnd();
+        } else if (budget.getYearMonthInstance().equals(YearMonth.from(period.getStart()))) {
+            overlappingStart = period.getStart();
             overlappingEnd = budget.lastDay();
-        } else if (budget.getYearMonthInstance().equals(YearMonth.from(end))) {
+        } else if (budget.getYearMonthInstance().equals(YearMonth.from(period.getEnd()))) {
             overlappingStart = budget.firstDay();
-            overlappingEnd = end;
+            overlappingEnd = period.getEnd();
         } else {
             overlappingStart = budget.firstDay();
             overlappingEnd = budget.lastDay();
@@ -55,7 +57,7 @@ public class BudgetService {
                 continue;
             }
             Budget budget = findBudget.get();
-            long overlappingDays = getOverlappingDays(start, end, budget);
+            long overlappingDays = getOverlappingDays(new Period(start, end), budget);
             rtBudget += budget.dailyAmount() * overlappingDays;
         }
 
