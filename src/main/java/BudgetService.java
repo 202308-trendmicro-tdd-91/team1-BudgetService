@@ -22,11 +22,6 @@ public class BudgetService {
         return YearMonth.parse(yearMonthString, formatter);
     }
 
-    private static YearMonth getYearMonthInstance(Budget budget) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
-        return YearMonth.parse(budget.yearMonth, formatter);
-    }
-
     public double query(LocalDate start, LocalDate end) {
         if (end.isBefore(start)) {
             return 0;
@@ -46,7 +41,7 @@ public class BudgetService {
         for (int i = 0; i < yearMonthsBetween.size(); i++) {
             if (i == 0) {
                 for (Budget budget : listBudgets) {
-                    YearMonth budgetYearMonth = getYearMonthInstance(budget);
+                    YearMonth budgetYearMonth = budget.getYearMonthInstance();
                     if (isDateInYearMonth(start, budgetYearMonth)) {
 
                         if (end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
