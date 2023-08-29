@@ -55,14 +55,14 @@ public class BudgetService {
                 }
             } else if (i == yearMonthsBetween.size() - 1) {
                 for (Budget budget : listBudgets) {
-                    if (isDateInYearMonth(end, toYearMonth(budget.yearMonth))) {
+                    if (isDateInYearMonth(end, budget.getYearMonthInstance())) {
                         daysBetween = ChronoUnit.DAYS.between(yearMonthsBetween.get(i).atDay(1), end);
-                        rtBudget += budget.amount / toYearMonth(budget.yearMonth).lengthOfMonth() * (daysBetween + 1);
+                        rtBudget += budget.amount / budget.getYearMonthInstance().lengthOfMonth() * (daysBetween + 1);
                     }
                 }
             } else {
                 for (Budget budget : listBudgets) {
-                    if (yearMonthsBetween.get(i).equals(toYearMonth(budget.yearMonth))) {
+                    if (yearMonthsBetween.get(i).equals(budget.getYearMonthInstance())) {
                         rtBudget += budget.amount;
                     }
                 }
