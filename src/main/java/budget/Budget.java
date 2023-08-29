@@ -12,7 +12,7 @@ public class Budget {
         this.amount = amount;
     }
 
-    long overlappingAmount(Period period) {
+    double overlappingAmount(Period period) {
         return dailyAmount() * period.getOverlappingDays(createPeriod());
     }
 
@@ -28,8 +28,8 @@ public class Budget {
         return getYearMonthInstance().atEndOfMonth();
     }
 
-    int dailyAmount() {
-        return this.amount / getYearMonthInstance().lengthOfMonth();
+    double dailyAmount() {
+        return (double)this.amount / getYearMonthInstance().lengthOfMonth();
     }
 
     YearMonth getYearMonthInstance() {
