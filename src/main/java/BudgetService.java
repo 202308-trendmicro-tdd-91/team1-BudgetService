@@ -37,13 +37,10 @@ public class BudgetService {
                 continue;
             }
             Budget budget = findBudget.get();
-            if (budget.getYearMonthInstance().equals(startYearMonth)) {
-                if (startYearMonth.equals(endYearMonth)) {
-//                if (!end.isAfter(yearMonthsBetween.get(0).atEndOfMonth())) {
-                    daysBetween = DAYS.between(start, end);
-                } else {
-                    daysBetween = DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
-                }
+            if (startYearMonth.equals(endYearMonth)) {
+                daysBetween = DAYS.between(start, end);
+            } else if (budget.getYearMonthInstance().equals(startYearMonth)) {
+                daysBetween = DAYS.between(start, yearMonthsBetween.get(0).atEndOfMonth());
             } else if (budget.getYearMonthInstance().equals(endYearMonth)) {
                 daysBetween = DAYS.between(yearMonth.atDay(1), end);
             } else {
