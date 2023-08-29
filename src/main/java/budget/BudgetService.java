@@ -17,19 +17,9 @@ public class BudgetService {
         if (end.isBefore(start)) {
             return 0;
         }
-        List<Budget> listBudgets = budgetRepo.getAll();
-//        List<YearMonth> yearMonthsBetween = new ArrayList<>();
-//        YearMonth startYearMonth = YearMonth.from(start);
-//        YearMonth endYearMonth = YearMonth.from(end);
-//
-//        YearMonth currentYearMonth = startYearMonth;
-//        while (!currentYearMonth.isAfter(endYearMonth)) {
-//            yearMonthsBetween.add(currentYearMonth);
-//            currentYearMonth = currentYearMonth.plusMonths(1);
-//        }
 
         double rtBudget = 0;
-        for (Budget budget : listBudgets) {
+        for (Budget budget : budgetRepo.getAll()) {
             Period period = new Period(start, end);
             rtBudget += budget.overlappingAmount(period);
         }
